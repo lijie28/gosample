@@ -46,6 +46,8 @@ func RegistUser(w rest.ResponseWriter, r *rest.Request) {
 
 	respond := SuccessRespond{Message: "OK"}
 
+	//todo: save in db
+
 	fmt.Println(respond.getJsonString())
 	w.WriteJson(respond.getJsonString())
 }

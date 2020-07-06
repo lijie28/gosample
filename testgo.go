@@ -10,6 +10,10 @@ import (
 	// "sync"
 )
 
+func CheckGoTest() {
+	fmt.Println("CheckGoTest")
+}
+
 func main() {
 	api := rest.NewApi()
 	api.Use(rest.DefaultDevStack...)
@@ -21,13 +25,6 @@ func main() {
 	}
 	api.SetApp(router)
 	log.Fatal(http.ListenAndServe(":8080", api.MakeHandler()))
-}
-
-type UserInfo struct {
-	Id       int
-	Name     string
-	Email    string
-	Birthday string
 }
 
 func RegistUser(w rest.ResponseWriter, r *rest.Request) {

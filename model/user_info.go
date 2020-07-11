@@ -6,12 +6,13 @@ import (
 
 //user info
 type UserInfo struct {
-	Id       int
+	Id       string
+	Pwd      string
 	Token    string
 	Name     string
 	Email    string
 	Phone    string
-	Birthday string
+	Nirthday string
 }
 
 // Regist the user

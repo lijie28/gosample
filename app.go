@@ -13,6 +13,7 @@ func main() {
 	api.Use(rest.DefaultDevStack...)
 	router, err := rest.MakeRouter(
 		rest.Post("/user/regist", route.RegistUser),
+		rest.Post("/user/get", route.GetUsers),
 	)
 	if err != nil {
 		log.Fatal(err)

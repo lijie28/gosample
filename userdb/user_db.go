@@ -24,37 +24,46 @@ type usertb struct {
 func Init() {
 
 	fmt.Println("init")
+	db, err := sql.Open("mysql", "root:fishli28@tcp(127.0.0.1:3306)/testdb")
+
+	// print("1")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	defer db.Close()
+
+	insertData(db)
+
+	print("2")
+	// var err error
+	// //初始化结构体，保存数据库参数
+	// dbw := dbWorker{
+	// 	// dsn: "root:@/testsql?charset=utf8",
+	// 	dsn: "root:password@tcp(127.0.0.1:3306)/testdb2",
+	// }
+
+	// //打开数据库,并保存给结构体内db
+	// dbw.db, err = sql.Open("mysql", dbw.dsn)
+	// //如果打开失败，panic退出
+	// err = dbw.db.Ping()
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// // log.Println("database successfully configured")
+	// // 关闭数据库
+	// defer dbw.db.Close()
+	// //插入数据
+	// dbw.insertData()
+	// //获取数据
+	// dbw.querData()
 }
 
-// func main() {
-// 	var err error
-// 	//初始化结构体，保存数据库参数
-// 	dbw := dbWorker{
-// 		// dsn: "root:@/testsql?charset=utf8",
-// 		dsn: "root:password@tcp(127.0.0.1:3306)/testdb",
-// 	}
-
-// 	//打开数据库,并保存给结构体内db
-// 	dbw.db, err = sql.Open("mysql", dbw.dsn)
-// 	//如果打开失败，panic退出
-// 	err = dbw.db.Ping()
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	// log.Println("database successfully configured")
-// 	// 关闭数据库
-// 	defer dbw.db.Close()
-// 	//插入数据
-// 	dbw.insertData()
-// 	//获取数据
-// 	dbw.querData()
-// }
-
 //创建方法，插入数据
-func (dbw *dbWorker) insertData() {
+func insertData(db *sql.DB) {
 	//预处理,插入数据
 	//
-	stmt, err := dbw.db.Prepare(`INSERT INTO tab_users(name,id,age) VALUES(?, null,?)`)
+	stmt, err := db.Prepare(`INSERT INTO tab_users(name,id,age) VALUES(?, null,?)`)
 
 	if err != nil {
 		fmt.Println(err)

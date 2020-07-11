@@ -1,34 +1,17 @@
-package main
+package route
 
 import (
+	"app/model"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/ant0ine/go-json-rest/rest"
-	// "sync"
 )
 
-func CheckGoTest() {
-	fmt.Println("CheckGoTest")
-}
-
-func main() {
-	api := rest.NewApi()
-	api.Use(rest.DefaultDevStack...)
-	router, err := rest.MakeRouter(
-		rest.Post("/user/regist", RegistUser),
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	api.SetApp(router)
-	log.Fatal(http.ListenAndServe(":8080", api.MakeHandler()))
-}
-
+//登録
 func RegistUser(w rest.ResponseWriter, r *rest.Request) {
-	user := UserInfo{}
+	user := model.UserInfo{}
 	err := r.DecodeJsonPayload(&user)
 
 	if err != nil {
@@ -43,7 +26,7 @@ func RegistUser(w rest.ResponseWriter, r *rest.Request) {
 
 	respond := SuccessRespond{Message: "OK"}
 
-	//todo: save in db
+	//TODO: save in db
 
 	fmt.Println(respond.getJsonString())
 	w.WriteJson(respond.getJsonString())

@@ -7,7 +7,7 @@ import (
 //user info
 type UserInfo struct {
 	Id       int
-	token    string
+	Token    string
 	Name     string
 	Email    string
 	Phone    string
